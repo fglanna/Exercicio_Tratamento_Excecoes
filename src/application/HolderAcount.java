@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import entities.Account;
+import exceptions.BusinessExceptions;
 
 public class HolderAcount {
 
@@ -29,12 +30,11 @@ public class HolderAcount {
 		System.out.print("Enter amount for withdraw: ");
 		double amount = scan.nextDouble();
 
-		String error = acc.validateWithdraw(amount);
-		if (error != null) {
-			System.out.println(error);
-		} else {
+		try {
 			acc.withdraw(amount);
 			System.out.printf("New Balance: " + String.format("%.2f", acc.getBalance()));
+		} catch (BusinessExceptions e) {
+			System.out.println(e.getMessage());
 		}
 	}
 }
