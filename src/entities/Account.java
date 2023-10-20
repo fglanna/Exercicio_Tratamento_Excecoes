@@ -1,18 +1,18 @@
 package entities;
 
 public class Account {
-	
+
 	private Integer number;
 	private String holder;
 	private Double balance;
 	private Double withdrawLimit;
-	
+
 	public Account() {
-		
+
 	}
 
 	public Account(Integer number, String holder, Double balance, Double withdrawLimit) {
-		
+
 		this.number = number;
 		this.holder = holder;
 		this.balance = balance;
@@ -54,7 +54,18 @@ public class Account {
 	public void deposit(double amount) {
 		balance += amount;
 	}
+
 	public void withdraw(double amount) {
 		balance -= amount;
+	}
+
+	public String validateWithdraw(double amount) {
+		if (amount > getWithdrawLimit()) {
+			return "Withdraw error: The amount exceeds withdraw limit";
+		}
+		if (amount > getBalance()) {
+			return "Withdraw error: Not enougth balance";
+		}
+		return null;
 	}
 }

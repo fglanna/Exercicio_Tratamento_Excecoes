@@ -29,11 +29,9 @@ public class HolderAcount {
 		System.out.print("Enter amount for withdraw: ");
 		double amount = scan.nextDouble();
 
-		if (amount > acc.getWithdrawLimit()) {
-			System.out.println("Withdraw error: The amount exceeds withdraw limit");
-		} else if (amount > acc.getBalance()) {
-			System.out.println("Withdraw error: Not enougth balance");
-
+		String error = acc.validateWithdraw(amount);
+		if (error != null) {
+			System.out.println(error);
 		} else {
 			acc.withdraw(amount);
 			System.out.printf("New Balance: " + String.format("%.2f", acc.getBalance()));
